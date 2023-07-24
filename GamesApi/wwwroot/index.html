@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Games CRUD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h3 class="mb-0">
+            <i class="fas fa-gamepad me-2"></i>Games CRUD
+        </h3>
+    </header>
+    <div class="container">
+        <div class="row" style="padding-top: 12px">
+            <div class="col-4">
+
+                <div id="addForm">
+                    <h3>Add Game</h3>
+                    <form action="javascript:void(0);" method="POST" onsubmit="addGame()">
+                        <div class="col">
+                            <h5>Game title</h5>
+                            <input type="text" id="add-title" placeholder="Title" class="form-control" />
+                            <br />
+                            <h6>Genre</h6>
+                            <select id="add-genre" class="form-control">
+                                <option value="Racing">Racing</option>
+                                <option value="RPG">RPG</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Shooter">Shooter</option>
+                                <option value="Strategy">Strategy</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <br />
+                            <h6>Description</h6>
+                            <input type="text" id="add-description" placeholder="Description" class="form-control" />
+                            <br />
+                            <h6>Release Year</h6>
+                            <select id="add-year" class="form-control">
+                                <option value="">Select year</option>
+                            </select>
+                            <hr />
+                            <input type="submit" value="Add" class="form-control" />
+                        </div>
+                    </form>
+                </div>
+
+                <div id="editForm">
+                    <h3>Edit Game</h3>
+                    <form action="javascript:void(0);" onsubmit="updateGame()">
+                        <div class="col">
+                            <input type="hidden" id="edit-id" />
+                            <h5>Game title</h5>
+                            <input type="text" id="edit-title" class="form-control" />
+                            <br />
+                            <h6>Genre</h6>
+                            <select id="edit-genre" class="form-control">
+                                <option value="Racing">Racing</option>
+                                <option value="RPG">RPG</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Shooter">Shooter</option>
+                                <option value="Strategy">Strategy</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <br />
+                            <h6>Description</h6>
+                            <input type="text" id="edit-description" class="form-control" />
+                            <br />
+                            <h6>Release Year</h6>
+                            <select id="edit-year" class="form-control">
+                                <option value="">Select year</option>
+                            </select>
+                            <hr />
+                            <input class="form-control" type="submit" value="Edit" /> <br />
+                            <input onclick="closeInput()" class="form-control" type="submit" value="Cancel" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <p id="counter"></p>
+                <table class="w-100">
+                    <tr>
+                        <th style="width: 5%;">Id</th>
+                        <th style="width: 25%;">Title</th>
+                        <th style="width: 10%;">Genre</th>
+                        <th style="width: 30%;">Description</th>
+                        <th style="width: 10%;">Release Year</th>
+                        <th style="width: 5%;"></th>
+                        <th style="width: 5%;"></th>
+                    </tr>
+                    <tbody id="games"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const selectAddYear = document.getElementById('add-year');
+        const selectEditYear = document.getElementById('edit-year');
+        const currentYear = new Date().getFullYear();
+        const startYear = 1970;
+
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            selectAddYear.appendChild(option);
+        }
+
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            selectEditYear.appendChild(option);
+        }
+    </script>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getGames();
+    </script>
+</body>
+</html>
